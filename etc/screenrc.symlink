@@ -1,0 +1,60 @@
+## gyaresu's .screenrc 2008-03-25
+# http://delicious.com/search?p=screenrc
+
+# Don't display the copyright page
+startup_message off
+
+# tab-completion flash in heading bar
+vbell off
+
+# keep scrollback n lines
+defscrollback 4000
+
+# Logging
+# deflog on # Automatically log new windows
+#logfile /tmp/screen.log
+#logfile flush 10
+#logtstamp on
+# logstamp after <sec>  # Controls time until second logstamp is used
+# logstam string <fmt>
+
+# Doesn't fix scrollback problem on xterm because if you scroll back
+# all you see is the other terminals history.
+# termcapinfo xterm|xterms|xs|rxvt ti@:te@
+
+# These will let you use
+#bind -c selectHighs 0 select 10 #these three commands are
+#bind -c selectHighs 1 select 11 #added to the command-class
+#bind -c selectHighs 2 select 12 #selectHighs
+#bind -c selectHighs 3 select 13
+#bind -c selectHighs 4 select 14
+#bind -c selectHighs 5 select 15
+
+
+#bind - command -c selectHighs   #bind the hyphen to
+
+# Start custom screens
+screen -t server 0
+screen -t main	    1
+screen -t vim	    2
+screen -t python    3	ipython
+screen -t dancing   4
+#screen -t giantfriend   6   these_are_ssh_to_server_scripts.sh
+#screen -t computerrescue    7	these_are_ssh_to_server_scripts.sh
+#screen -t BMon	    8	bmon -p eth0
+#screen -t htop	    9	htop
+#screen -t hellanzb  10	hellanzb
+#screen -t interactive.fiction  8
+#screen -t hellahella   8   paster serve --daemon  /home/gyaresu/downloads/hellahella/hella.ini
+
+shelltitle "$ |bash"
+
+# THIS IS THE PRETTY BIT
+#change the hardstatus settings to give an window list at the bottom of the
+##screen, with the time and date and with the current window highlighted
+hardstatus             alwayslastline
+#hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+
+#CUSTOM
+escape ^jj

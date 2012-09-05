@@ -1,0 +1,38 @@
+#Screen bindings for tmux
+set -g prefix C-j
+bind-key C-j last-window
+
+# Options
+#set-window-option mode-keys vi
+# set-option mode-keys vi
+
+#Split Window
+unbind %
+bind | split-window -h
+bind S split-window -v
+
+unbind r
+bind r source-file ~/.tmux.conf
+
+#This is a test
+unbind t
+bind t list-sessions
+
+unbind '"'
+bind '"' list-sessions
+
+unbind ^A
+bind ^A select-pane -t :.+
+
+unbind ^SPACE
+bind ^SPACE list-sessions
+
+#Set window notifications
+setw -g monitor-activity on
+set -g visual-activity on
+
+#Automatic rename
+setw -g automatic-rename on
+
+# Copy mode using vi syntax
+#set-window-option mode-keys vi

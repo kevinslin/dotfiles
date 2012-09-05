@@ -1,0 +1,9 @@
+set completion-ignore-case on 
+$if Bash 
+  set show-all-if-ambiguous on 
+$endif 
+
+# Search backwards and forwards in history 
+# using up &amp; down keys 
+"\M-A": history-search-backward 
+"\M-B": history-search-forward

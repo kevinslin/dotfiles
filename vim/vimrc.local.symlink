@@ -1,0 +1,170 @@
+" TODO: test"{{{
+" Disable annoying auto line break"{{{
+"fu! local:disableBr()
+  "set wrap
+  "set linebreak
+  "set nolist  " list disables linebreak
+  "set textwidth=0
+  "set wrapmargin=0
+  "set fo-=t
+"endfu
+
+" Disable line breaks for all file types
+" :au BufNewFile,BufRead *.* call local:disableBr()"}}}
+"}}}
+
+" New:
+" ----
+:au FocusLost * silent! wa " Save when losing focus
+set clipboard=unnamed
+set autoread   " watch file changes and reload file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+" source vim file
+nmap <silent> <leader>eo :so $MYVIMRC<CR>
+" don't close buffers or ask to save buffers
+set hidden
+set history=99 " change history kept (default 20)
+set visualbell
+set noerrorbells
+set nobackup
+set noswapfile
+set pastetoggle=<F4>
+noremap ; :
+" go to next row ignoring word wrap
+nnoremap j gj
+nnoremap k gk
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+" toggle highlight search
+nmap <silent> !/ :nohlsearch<CR>
+
+" Without setting this, ZoomWin restores windows in a way that causes
+" equalalways behavior to be triggered the next time CommandT is used.
+" This is likely a bludgeon to solve some other issue, but it works
+set noequalalways
+
+" NERDTree configuration
+let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']"{{{
+map <Leader>n :NERDTreeToggle<CR>"}}}
+
+" Command-T configuration
+let g:CommandTMaxHeight=20
+
+" ZoomWin configuration
+map <Leader><Leader> :ZoomWin<CR>
+
+" TODO: ?
+" CTags
+map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+map <C-\> :tnext<CR>
+
+" Remember last location in file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal g'\"" | endif
+endif
+
+function! s:setupWrapping()
+  set wrap
+  set wrapmargin=2
+  set textwidth=72
+endfunction
+
+function! s:setupMarkup()
+  call s:setupWrapping()
+  map <buffer> <Leader>p :Hammer<CR>
+endfunction
+
+" make uses real tabs
+au FileType make set noexpandtab
+
+" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
+
+" md, markdown, and mk are markdown and define buffer-local preview
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+
+" add json syntax highlighting
+au BufNewFile,BufRead *.json set ft=javascript
+
+au BufRead,BufNewFile *.txt call s:setupWrapping()
+
+
+" Opens an edit command with the path of the currently edited file filled in
+" Normal mode: <Leader>e
+map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Opens a tab edit command with the path of the currently edited file filled in
+" Normal mode: <Leader>t
+map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+
+" Inserts the path of the currently edited file into a command
+" Command mode: Ctrl+P
+cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+
+" Unimpaired configuration
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+" Enable syntastic syntax checking
+let g:syntastic_enable_signs=1
+let g:syntastic_quiet_warnings=1
+
+" gist-vim defaults
+" if has("mac")
+"   let g:gist_clip_command = 'pbcopy'
+" elseif has("unix")
+"   let g:gist_clip_command = 'xclip -selection clipboard'
+" endif
+" let g:gist_detect_filetype = 1
+" let g:gist_open_browser_after_post = 1
+
+" Use modeline overrides
+set modeline
+set modelines=10
+
+" Default color scheme
+color desert
+
+" Turn off jslint errors by default
+let g:JSLintHighlightErrorLine = 0
+
+" MacVIM shift+arrow-keys behavior (required in .vimrc)
+let macvim_hig_shift_movement = 1
+
+" % to bounce from do to end etc.
+runtime! macros/matchit.vim
+
+" Show (partial) command in the status line
+set showcmd
+
+"Custom
+function! ToggleHLSearch()
+  if &hls
+    set nohls
+  else
+    set hls
+  endif
+endfunction
+
+function! ToggleTransparancy()
+  echo "setting transparancy"
+  if &transparancy
+    set transparancy=15
+  else
+    set transparancy=0
+  endif
+endfunction
+
+" Hj syntax highlighting
+au BufNewFile,BufRead *.hj set filetype=java
+
+" Tlist
+map <Leader>t :TlistToggle<CR>

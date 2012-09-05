@@ -1,0 +1,25 @@
+alias test=ls
+alias dj=django-admin.py
+
+alias topm="top -o rsize"
+alias topc="top -o cpu"
+alias ll="ls -l"
+#alias ls="ls --color=auto" #doesn't work on mac
+
+# Shortcuts
+alias s="source ~/.bashrc"
+
+# Git
+alias gb="git branch"
+alias gs="git status"
+alias gc="git commit -a"
+
+# Tmux
+alias tl="tmux list-sessions"
+alias ta="tmux attach -t"
+alias tn="tmux new -s"
+
+# Experimental
+alias git-log="git tag | tail -n 1 | xargs -I {} git log {}.."
+alias g-reset="rm data.sql && ./manage.py syncdb"
+alias serve="python -m SimpleHTTPServer"

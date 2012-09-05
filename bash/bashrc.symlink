@@ -1,0 +1,62 @@
+# ===  Imports and aliases ===
+
+# Include external files
+if [ -a ~/.bash_aliases ];then source ~/.bash_aliases; fi
+if [ -a ~/.bashrc_local ];then source ~/.bashrc_local; fi
+
+
+# === Unsorted ===
+# Aliases
+# TODO: move into aliases
+alias topm="top -o rsize"
+alias topc="top -o cpu"
+alias ll="ls -l"
+# TODO: make sure platform isn't mac
+alias ls="ls --color=auto"
+
+# Settings
+# ---------------
+export EDITOR="vim"
+export ASGARD="~/Dropbox/asgard" #TODO(customize)
+export INPUTRC=~/.inputrc  # Allows searching of history
+export A_LIBS="~/Dropbox/code/libs/"
+
+# Other:
+BOND="op successful!"
+
+# Functions
+# ---------------
+# Replacement for cd
+function go () {
+    cd "$1"
+    ls -l
+}
+
+# Include external files
+# ---------------
+PERL_PATH="/Users/kevinlin/Dropbox/code/libs/perl"
+#if [ -d ~/Dropbox/asgard/bin ]; then export PATH=~/Dropbox/asgard/bin:$PATH; fi
+if [ -d $PERL_PATH ]; then export PATH=$PERL_PATH:$PATH; fi
+
+
+##############################################
+# External
+# TODO: move once this gets too big
+
+# Python
+# --------------------------
+PYDEV_PATH="/Applications/eclipse/plugins/org.python.pydev.debug_2.5.0.2012040618/pysrc/"
+
+export PYTHONPATH=~/Dropbox/code/libs/python/bin:$PYTHONPATH
+if [ -d $PYDEV_PATH ]; then export PYTHONPATH=$PYDEV_PATH:$PYTHONPATH; fi
+
+# Virtualenv wrapper
+export WORKON_HOME=~/.virtualenvs
+#/Users/kevinlin/.virtualenvs/virtualenvwrapper.sh
+if [ -a $WORKON_HOME/virtualenvwrapper.sh ];then
+    source $WORKON_HOME/virtualenvwrapper.sh
+fi
+
+# Fabric wrapper
+export FABRICW_HOME=~/.fabricwrapper
+

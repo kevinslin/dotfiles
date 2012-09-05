@@ -1,0 +1,13 @@
+build/*
+bin/*
+
+*~
+.DS_Store
+*.pyc
+
+*.class
+*.jar
+
+*.o
+
+*.swp

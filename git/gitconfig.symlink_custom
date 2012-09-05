@@ -1,0 +1,11 @@
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff
+    undo = reset --hard
+    vtag = tag -l -n1
+    tlog = log --since="yesterday"
+
+
